@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>createMembersForm</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body>
+<div>
+
+</div>
+<h1 class="display-1 text-center">Todo List</h1>
+<div class="container">
+    <div class="form-group">
+        <label for="input-title">할 일</label>
+        <input type="text" id="input-title" name="input-title" placeholder="할 일을 입력하세요.">
+        <button type="submit" class="btn btn-primary" onclick="dataSend()">등록</button>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>할 일</th>
+            <th>완료 여부</th>
+            <th>삭제</th>
+        </tr>
+        </thead>
+        <tbody id="todolist">
+        <tr th:each="response : ${responses}">
+            <td th:text="${response.id}"></td>
+            <td th:text="${response.content}"></td>
+            <td><input type="checkbox" th:checked="${response.completed}" th:onchange="update(this.checked)"></td>
+            <td><input type="button" value="삭제" th:onclick="deleteData([[${response.id}]])"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="/js/todoAjax.js"></script>
+</body>
+</html>
